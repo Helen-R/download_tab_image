@@ -1,0 +1,11 @@
+library(dplyr)
+wd <- getwd()
+setwd("backup/Tableau_image_Helen/")
+x <- list.files()
+y <- gsub(".png", "", x)
+# y1 <- as.data.frame(matrix(unlist(strsplit(y, "_")), ncol=2, byrow = T), stringsAsFactors = F)
+y1 <- strsplit(y, "_") %>% unlist %>% matrix(ncol = 2, byrow = T) %>% 
+  as.data.frame(stringsAsFactors = F)
+y <- paste0(y1[, 2], "_", y1[, 1], ".png")
+file.rename(x, y)
+setwd(wd)
